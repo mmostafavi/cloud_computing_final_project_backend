@@ -22,7 +22,7 @@ export default class AuthControllers {
       } else {
         const isPasswordCorrect = await bcrypt.compare(
           password,
-          userExist.user!.authData.password,
+          userExist.user!.password,
         );
 
         if (isPasswordCorrect) {
@@ -43,10 +43,7 @@ export default class AuthControllers {
           res.json({
             ...userExist.user!,
             token,
-            authData: {
-              ...userExist.user!.authData,
-              password: null,
-            },
+            password: null,
           });
         } else {
           res.status(403).send(`password is incorrect`);
