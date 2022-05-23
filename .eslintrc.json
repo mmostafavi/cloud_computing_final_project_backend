@@ -10,5 +10,11 @@
     "sourceType": "module"
   },
   "plugins": ["@typescript-eslint"],
-  "rules": {}
+  "rules": {
+    "no-console": "off",
+    "import/extensions": "off",
+    "import/no-unresolved": "off",
+    "no-useless-catch": "off",
+    "no-underscore-dangle": "off"
+  }
 }
