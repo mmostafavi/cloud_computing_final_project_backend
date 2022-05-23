@@ -3,7 +3,7 @@ import "dotenv/config";
 import cors from "cors";
 
 // *: import routes here
-// import route from "path"
+import authRoutes from "./api/routes/auth";
 // *: import routes here
 
 import authMiddleware from "../src/middlewares/auth";
@@ -15,5 +15,7 @@ app.use(express.json());
 
 app.use(authMiddleware);
 // app.options("*", (cors as (options: CorsOptions) => RequestHandler)());
+
+app.use("/auth", authRoutes);
 
 export default app;

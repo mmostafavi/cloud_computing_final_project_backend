@@ -1,4 +1,5 @@
 import { MongoClient, ServerApiVersion } from "mongodb";
+import UsersDAO from "./dao/usersDAO";
 import app from "./server";
 
 const PORT = process.env.PORT || 8000;
@@ -11,9 +12,9 @@ MongoClient.connect(uri, { serverApi: ServerApiVersion.v1 })
     process.exit(1);
   })
 
-  .then(async () => {
+  .then(async (client) => {
     // *: inject client to DAOs here
-
+    await UsersDAO.injectDB(client);
     // *: inject client to DAOs here
 
     app.listen(PORT, () => {
