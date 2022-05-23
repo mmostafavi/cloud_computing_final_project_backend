@@ -54,4 +54,26 @@ export default class DBControllers {
       throw error;
     }
   }
+
+  static async deleteOne(req: Request, res: Response) {
+    try {
+      if (!isUser(req.body.isAuth, req.body.userData)) {
+        return res.status(403).send(`user doesn't have permission to insert`);
+      }
+
+      const { collectionName, docId } = req.body.data;
+
+      const isOwner = isUserOwner(collectionName, req.body.userData);
+
+      if (!isOwner) {
+        return res.status(403).send(`user doesn't own this database`);
+      }
+
+      await dbDAO.deleteOne(collectionName, docId);
+      return res.status(200).send(`Doc successfully deleted`);
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
+  }
 }

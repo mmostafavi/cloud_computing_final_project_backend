@@ -1,4 +1,4 @@
-import { MongoClient, Db } from "mongodb";
+import { MongoClient, Db, ObjectId } from "mongodb";
 import UsersDAO from "./usersDAO";
 // import _ from "lodash";
 // import bcrypt from "bcryptjs";
@@ -38,6 +38,16 @@ export default class DBDAO {
     try {
       const collection = await db.collection(collectionName);
       await collection.insertOne(doc);
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
+  }
+
+  static async deleteOne(collectionName: string, docId: string) {
+    try {
+      const collection = await db.collection(collectionName);
+      await collection.deleteOne({ _id: new ObjectId(docId) });
     } catch (error) {
       console.error(error);
       throw error;
