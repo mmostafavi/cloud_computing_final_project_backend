@@ -39,7 +39,20 @@ export default class UsersDAO {
         password: hashedPassword,
         fName,
         lName,
+        dbs: [],
       });
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
+  }
+
+  static async addDB(collectionName: string, username: string) {
+    try {
+      await usersCollection.updateOne(
+        { username },
+        { $push: { dbs: collectionName } },
+      );
     } catch (error) {
       console.error(error);
       throw error;

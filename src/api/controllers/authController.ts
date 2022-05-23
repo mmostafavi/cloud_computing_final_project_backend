@@ -33,6 +33,7 @@ export default class AuthControllers {
               userId: userExist.user!._id.toString(),
               fName: userExist.user!.fName,
               lName: userExist.user!.lName,
+              dbs: userExist.user!.dbs,
             },
             process.env.JWT_KEY!,
             {

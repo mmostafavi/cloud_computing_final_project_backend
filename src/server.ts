@@ -4,6 +4,8 @@ import cors from "cors";
 
 // *: import routes here
 import authRoutes from "./api/routes/auth";
+import dbRoutes from "./api/routes/db";
+
 // *: import routes here
 
 import authMiddleware from "../src/middlewares/auth";
@@ -17,5 +19,6 @@ app.use(authMiddleware);
 // app.options("*", (cors as (options: CorsOptions) => RequestHandler)());
 
 app.use("/auth", authRoutes);
+app.use("/db", dbRoutes);
 
 export default app;
