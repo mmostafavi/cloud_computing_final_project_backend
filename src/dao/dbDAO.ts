@@ -33,4 +33,14 @@ export default class DBDAO {
       throw error;
     }
   }
+
+  static async insertOne(collectionName: string, doc: any) {
+    try {
+      const collection = await db.collection(collectionName);
+      await collection.insertOne(doc);
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
+  }
 }
