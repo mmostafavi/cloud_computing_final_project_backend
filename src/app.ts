@@ -1,12 +1,22 @@
-import express from "express";
+import { MongoClient, ServerApiVersion } from "mongodb";
+import app from "./server";
 
-const app = express();
-const port = 3000;
+const PORT = process.env.PORT || 8000;
 
-app.get("/", (req, res) => {
-  res.send("Hello World!");
-});
+const uri = process.env.MONGODB_URI as string;
 
-app.listen(port, () =>
-  console.log(`Express is listening at http://localhost:${port}`),
-);
+MongoClient.connect(uri, { serverApi: ServerApiVersion.v1 })
+  .catch((err) => {
+    console.error(err);
+    process.exit(1);
+  })
+
+  .then(async () => {
+    // *: inject client to DAOs here
+
+    // *: inject client to DAOs here
+
+    app.listen(PORT, () => {
+      console.log(`listening on http://localhost:${PORT}`);
+    });
+  });
